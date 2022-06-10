@@ -77,7 +77,7 @@ pub fn init(interp: &mut Artichoke) -> InitializeResult<()> {
     Ok(())
 }
 
-unsafe extern "C" fn string_mul(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_mul(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let other = mrb_get_args!(mrb, required = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -89,7 +89,7 @@ unsafe extern "C" fn string_mul(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -
     }
 }
 
-unsafe extern "C" fn string_add(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_add(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let other = mrb_get_args!(mrb, required = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -101,7 +101,7 @@ unsafe extern "C" fn string_add(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -
     }
 }
 
-unsafe extern "C" fn string_push(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_push(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let other = mrb_get_args!(mrb, required = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -113,7 +113,7 @@ unsafe extern "C" fn string_push(mrb: *mut sys::mrb_state, slf: sys::mrb_value) 
     }
 }
 
-unsafe extern "C" fn string_cmp_rocket(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_cmp_rocket(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let other = mrb_get_args!(mrb, required = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -125,7 +125,7 @@ unsafe extern "C" fn string_cmp_rocket(mrb: *mut sys::mrb_state, slf: sys::mrb_v
     }
 }
 
-unsafe extern "C" fn string_equals_equals(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_equals_equals(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let other = mrb_get_args!(mrb, required = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -137,7 +137,7 @@ unsafe extern "C" fn string_equals_equals(mrb: *mut sys::mrb_state, slf: sys::mr
     }
 }
 
-unsafe extern "C" fn string_aref(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_aref(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let (first, second) = mrb_get_args!(mrb, required = 1, optional = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -150,7 +150,7 @@ unsafe extern "C" fn string_aref(mrb: *mut sys::mrb_state, slf: sys::mrb_value) 
     }
 }
 
-unsafe extern "C" fn string_aset(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_aset(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -161,7 +161,7 @@ unsafe extern "C" fn string_aset(mrb: *mut sys::mrb_state, slf: sys::mrb_value) 
     }
 }
 
-unsafe extern "C" fn string_ascii_only(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_ascii_only(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -172,7 +172,7 @@ unsafe extern "C" fn string_ascii_only(mrb: *mut sys::mrb_state, slf: sys::mrb_v
     }
 }
 
-unsafe extern "C" fn string_b(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_b(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -183,7 +183,7 @@ unsafe extern "C" fn string_b(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> 
     }
 }
 
-unsafe extern "C" fn string_bytes(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_bytes(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -194,7 +194,7 @@ unsafe extern "C" fn string_bytes(mrb: *mut sys::mrb_state, slf: sys::mrb_value)
     }
 }
 
-unsafe extern "C" fn string_bytesize(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_bytesize(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -205,7 +205,7 @@ unsafe extern "C" fn string_bytesize(mrb: *mut sys::mrb_state, slf: sys::mrb_val
     }
 }
 
-unsafe extern "C" fn string_byteslice(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_byteslice(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let (index, length) = mrb_get_args!(mrb, required = 1, optional = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -218,7 +218,7 @@ unsafe extern "C" fn string_byteslice(mrb: *mut sys::mrb_state, slf: sys::mrb_va
     }
 }
 
-unsafe extern "C" fn string_capitalize(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_capitalize(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -229,7 +229,7 @@ unsafe extern "C" fn string_capitalize(mrb: *mut sys::mrb_state, slf: sys::mrb_v
     }
 }
 
-unsafe extern "C" fn string_capitalize_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_capitalize_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -240,7 +240,7 @@ unsafe extern "C" fn string_capitalize_bang(mrb: *mut sys::mrb_state, slf: sys::
     }
 }
 
-unsafe extern "C" fn string_casecmp_ascii(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_casecmp_ascii(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let other = mrb_get_args!(mrb, required = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -252,7 +252,7 @@ unsafe extern "C" fn string_casecmp_ascii(mrb: *mut sys::mrb_state, slf: sys::mr
     }
 }
 
-unsafe extern "C" fn string_casecmp_unicode(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_casecmp_unicode(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let other = mrb_get_args!(mrb, required = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -264,7 +264,7 @@ unsafe extern "C" fn string_casecmp_unicode(mrb: *mut sys::mrb_state, slf: sys::
     }
 }
 
-unsafe extern "C" fn string_center(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_center(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let (width, padstr) = mrb_get_args!(mrb, required = 1, optional = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -277,7 +277,7 @@ unsafe extern "C" fn string_center(mrb: *mut sys::mrb_state, slf: sys::mrb_value
     }
 }
 
-unsafe extern "C" fn string_chars(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_chars(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -288,7 +288,7 @@ unsafe extern "C" fn string_chars(mrb: *mut sys::mrb_state, slf: sys::mrb_value)
     }
 }
 
-unsafe extern "C" fn string_chomp(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_chomp(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let separator = mrb_get_args!(mrb, optional = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -309,7 +309,7 @@ unsafe extern "C" fn string_chomp(mrb: *mut sys::mrb_state, slf: sys::mrb_value)
     }
 }
 
-unsafe extern "C" fn string_chomp_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_chomp_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let separator = mrb_get_args!(mrb, optional = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -321,7 +321,7 @@ unsafe extern "C" fn string_chomp_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_v
     }
 }
 
-unsafe extern "C" fn string_chop(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_chop(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -341,7 +341,7 @@ unsafe extern "C" fn string_chop(mrb: *mut sys::mrb_state, slf: sys::mrb_value) 
     }
 }
 
-unsafe extern "C" fn string_chop_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_chop_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -352,7 +352,7 @@ unsafe extern "C" fn string_chop_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_va
     }
 }
 
-unsafe extern "C" fn string_chr(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_chr(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -363,7 +363,7 @@ unsafe extern "C" fn string_chr(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -
     }
 }
 
-unsafe extern "C" fn string_clear(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_clear(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -374,7 +374,7 @@ unsafe extern "C" fn string_clear(mrb: *mut sys::mrb_state, slf: sys::mrb_value)
     }
 }
 
-unsafe extern "C" fn string_codepoints(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_codepoints(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -385,7 +385,7 @@ unsafe extern "C" fn string_codepoints(mrb: *mut sys::mrb_state, slf: sys::mrb_v
     }
 }
 
-unsafe extern "C" fn string_concat(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_concat(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -396,7 +396,7 @@ unsafe extern "C" fn string_concat(mrb: *mut sys::mrb_state, slf: sys::mrb_value
     }
 }
 
-unsafe extern "C" fn string_downcase(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_downcase(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -407,7 +407,7 @@ unsafe extern "C" fn string_downcase(mrb: *mut sys::mrb_state, slf: sys::mrb_val
     }
 }
 
-unsafe extern "C" fn string_downcase_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_downcase_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -418,7 +418,7 @@ unsafe extern "C" fn string_downcase_bang(mrb: *mut sys::mrb_state, slf: sys::mr
     }
 }
 
-unsafe extern "C" fn string_empty(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_empty(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -429,7 +429,7 @@ unsafe extern "C" fn string_empty(mrb: *mut sys::mrb_state, slf: sys::mrb_value)
     }
 }
 
-unsafe extern "C" fn string_eql(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_eql(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let other = mrb_get_args!(mrb, required = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -441,7 +441,7 @@ unsafe extern "C" fn string_eql(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -
     }
 }
 
-unsafe extern "C" fn string_getbyte(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_getbyte(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let index = mrb_get_args!(mrb, required = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -453,7 +453,7 @@ unsafe extern "C" fn string_getbyte(mrb: *mut sys::mrb_state, slf: sys::mrb_valu
     }
 }
 
-unsafe extern "C" fn string_hash(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_hash(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -464,7 +464,7 @@ unsafe extern "C" fn string_hash(mrb: *mut sys::mrb_state, slf: sys::mrb_value) 
     }
 }
 
-unsafe extern "C" fn string_include(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_include(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let other = mrb_get_args!(mrb, required = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -476,7 +476,7 @@ unsafe extern "C" fn string_include(mrb: *mut sys::mrb_state, slf: sys::mrb_valu
     }
 }
 
-unsafe extern "C" fn string_index(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_index(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let (needle, offset) = mrb_get_args!(mrb, required = 1, optional = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -489,7 +489,7 @@ unsafe extern "C" fn string_index(mrb: *mut sys::mrb_state, slf: sys::mrb_value)
     }
 }
 
-unsafe extern "C" fn string_initialize(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_initialize(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let s = mrb_get_args!(mrb, optional = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -501,7 +501,7 @@ unsafe extern "C" fn string_initialize(mrb: *mut sys::mrb_state, slf: sys::mrb_v
     }
 }
 
-unsafe extern "C" fn string_initialize_copy(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_initialize_copy(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let other = mrb_get_args!(mrb, required = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -513,7 +513,7 @@ unsafe extern "C" fn string_initialize_copy(mrb: *mut sys::mrb_state, slf: sys::
     }
 }
 
-unsafe extern "C" fn string_inspect(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_inspect(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -524,7 +524,7 @@ unsafe extern "C" fn string_inspect(mrb: *mut sys::mrb_state, slf: sys::mrb_valu
     }
 }
 
-unsafe extern "C" fn string_intern(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_intern(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -535,7 +535,7 @@ unsafe extern "C" fn string_intern(mrb: *mut sys::mrb_state, slf: sys::mrb_value
     }
 }
 
-unsafe extern "C" fn string_length(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_length(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -546,7 +546,7 @@ unsafe extern "C" fn string_length(mrb: *mut sys::mrb_state, slf: sys::mrb_value
     }
 }
 
-unsafe extern "C" fn string_ord(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_ord(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -557,7 +557,7 @@ unsafe extern "C" fn string_ord(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -
     }
 }
 
-unsafe extern "C" fn string_replace(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_replace(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let other = mrb_get_args!(mrb, required = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -569,7 +569,7 @@ unsafe extern "C" fn string_replace(mrb: *mut sys::mrb_state, slf: sys::mrb_valu
     }
 }
 
-unsafe extern "C" fn string_reverse(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_reverse(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -580,7 +580,7 @@ unsafe extern "C" fn string_reverse(mrb: *mut sys::mrb_state, slf: sys::mrb_valu
     }
 }
 
-unsafe extern "C" fn string_reverse_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_reverse_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -591,7 +591,7 @@ unsafe extern "C" fn string_reverse_bang(mrb: *mut sys::mrb_state, slf: sys::mrb
     }
 }
 
-unsafe extern "C" fn string_rindex(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_rindex(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let (needle, offset) = mrb_get_args!(mrb, required = 1, optional = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -604,7 +604,7 @@ unsafe extern "C" fn string_rindex(mrb: *mut sys::mrb_state, slf: sys::mrb_value
     }
 }
 
-unsafe extern "C" fn string_scan(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_scan(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let (pattern, block) = mrb_get_args!(mrb, required = 1, &block);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -616,7 +616,7 @@ unsafe extern "C" fn string_scan(mrb: *mut sys::mrb_state, slf: sys::mrb_value) 
     }
 }
 
-unsafe extern "C" fn string_setbyte(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_setbyte(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let (index, byte) = mrb_get_args!(mrb, required = 2);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -629,7 +629,7 @@ unsafe extern "C" fn string_setbyte(mrb: *mut sys::mrb_state, slf: sys::mrb_valu
     }
 }
 
-unsafe extern "C" fn string_slice_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_slice_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -640,7 +640,7 @@ unsafe extern "C" fn string_slice_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_v
     }
 }
 
-unsafe extern "C" fn string_split(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_split(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -651,7 +651,7 @@ unsafe extern "C" fn string_split(mrb: *mut sys::mrb_state, slf: sys::mrb_value)
     }
 }
 
-unsafe extern "C" fn string_to_f(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_to_f(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -662,7 +662,7 @@ unsafe extern "C" fn string_to_f(mrb: *mut sys::mrb_state, slf: sys::mrb_value) 
     }
 }
 
-unsafe extern "C" fn string_to_i(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_to_i(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     let base = mrb_get_args!(mrb, optional = 1);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -674,7 +674,7 @@ unsafe extern "C" fn string_to_i(mrb: *mut sys::mrb_state, slf: sys::mrb_value) 
     }
 }
 
-unsafe extern "C" fn string_to_s(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_to_s(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -686,7 +686,7 @@ unsafe extern "C" fn string_to_s(mrb: *mut sys::mrb_state, slf: sys::mrb_value) 
     }
 }
 
-unsafe extern "C" fn string_upcase(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_upcase(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -697,7 +697,7 @@ unsafe extern "C" fn string_upcase(mrb: *mut sys::mrb_state, slf: sys::mrb_value
     }
 }
 
-unsafe extern "C" fn string_upcase_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_upcase_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
@@ -708,7 +708,7 @@ unsafe extern "C" fn string_upcase_bang(mrb: *mut sys::mrb_state, slf: sys::mrb_
     }
 }
 
-unsafe extern "C" fn string_valid_encoding(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
+unsafe extern "C-unwind" fn string_valid_encoding(mrb: *mut sys::mrb_state, slf: sys::mrb_value) -> sys::mrb_value {
     mrb_get_args!(mrb, none);
     unwrap_interpreter!(mrb, to => guard);
     let value = Value::from(slf);
