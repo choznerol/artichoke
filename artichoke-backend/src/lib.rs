@@ -14,6 +14,7 @@
 #![warn(trivial_casts, trivial_numeric_casts)]
 #![warn(unused_qualifications)]
 #![warn(variant_size_differences)]
+#![feature(c_unwind)]
 
 //! # artichoke-backend
 //!
