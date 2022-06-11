@@ -37,6 +37,7 @@ mod paths {
 mod libs {
     use std::env;
     use std::ffi::OsStr;
+    use std::fs;
     use std::path::PathBuf;
     use std::process::{Command, ExitStatus, Stdio};
     use std::str;
@@ -225,6 +226,15 @@ mod libs {
         // Try to use an existing global install of bindgen
         let status = invoke_bindgen(wasm, out_dir, OsStr::new("bindgen"));
         if matches!(status, Some(status) if status.success()) {
+            let bindings_path = PathBuf::from(out_dir).join("ffi.rs");
+            let bindings = fs::read_to_string(&bindings_path).unwrap();
+            fs::write(
+                bindings_path,
+                bindings
+                    .replace(r#"unsafe extern "C" fn"#, r#"unsafe extern "C-unwind" fn"#)
+                    .replace(r#"extern "C" {"#, r#"extern "C-unwind" {"#),
+            )
+            .unwrap();
             return;
         }
         // Install bindgen
@@ -250,6 +260,15 @@ mod libs {
             bindgen_install_dir.join("bin").join("bindgen").as_os_str(),
         );
         assert!(status.unwrap().success(), "bindgen failed");
+        let bindings_path = PathBuf::from(out_dir).join("ffi.rs");
+        let bindings = fs::read_to_string(&bindings_path).unwrap();
+        fs::write(
+            bindings_path,
+            bindings
+                .replace(r#"unsafe extern "C" fn"#, r#"unsafe extern "C-unwind" fn"#)
+                .replace(r#"extern "C" {"#, r#"extern "C-unwind" {"#),
+        )
+        .unwrap();
     }
 
     pub fn invoke_bindgen(wasm: Option<Wasm>, out_dir: &OsStr, bindgen_executable: &OsStr) -> Option<ExitStatus> {
