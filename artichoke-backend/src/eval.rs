@@ -1,4 +1,5 @@
 use std::ffi::OsStr;
+use std::os::unix::prelude::OsStrExt;
 use std::path::Path;
 
 use bstr::ByteSlice;
@@ -60,7 +61,11 @@ impl Eval for Artichoke {
         let code = self
             .read_source_file_contents(file)
             .map_err(|err| {
-                let message = format!("ruby: {} -- {}", err.message().as_bstr(), file.to_string_lossy());
+                let message = format!(
+                    "ruby: {} -- {:?}",
+                    err.message().as_bstr(),
+                    file.as_os_str().as_bytes().to_vec(),
+                );
                 LoadError::from(message)
             })?
             .into_owned();
