@@ -1,0 +1,1 @@
+searchState.loadedDescShard("posix_space", 0, "A small crate which determines if a byte is classified as …\nDetermine whether the given byte is in <strong>space</strong> POSIX …")

@@ -1,0 +1,1 @@
+searchState.loadedDescShard("scolapasta_aref", 0, "Functions for working with Ruby containers that respond to …\nConvert a signed aref offset to a <code>usize</code> index into the …")

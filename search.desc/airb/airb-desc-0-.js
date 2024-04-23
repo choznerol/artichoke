@@ -1,0 +1,1 @@
+searchState.loadedDescShard("airb", 0, "<code>airb</code> is the Artichoke implementation of <code>irb</code> and is an …")

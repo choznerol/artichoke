@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="tzdb — Time Zone Database"><title>tzdb - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-46f98efaafac5295.ttf.woff2,FiraSans-Regular-018c141bf0843ffd.woff2,FiraSans-Medium-8f9a781e4970d388.woff2,SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2,SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-081576b923113409.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="tzdb" data-themes="" data-resource-suffix="" data-rustdoc-version="1.79.0-nightly (fb898629a 2024-04-21)" data-channel="nightly" data-search-js="search-bf21c90c8c1d92b1.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../static.files/storage-e32f0c247825364d.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-20a3ad099b048cf2.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-09095024cf37855e.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../tzdb/index.html">tzdb</a><span class="version">0.4.5</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#modules">Modules</a></li><li><a href="#constants">Constants</a></li><li><a href="#functions">Functions</a></li></ul></section></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../tzdb/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Type ‘S’ or ‘/’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings">Settings</a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">tzdb</a><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><span class="out-of-band"><a class="src" href="../src/tzdb/lib.rs.html#17-197">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="tzdb--time-zone-database"><a class="doc-anchor" href="#tzdb--time-zone-database">§</a>tzdb — Time Zone Database</h2>
+<p><a href="https://github.com/Kijewski/tzdb/actions/workflows/ci.yml"><img src="https://img.shields.io/github/workflow/status/Kijewski/tzdb/CI?logo=github" alt="GitHub Workflow Status" /></a>
+<a href="https://crates.io/crates/tzdb"><img src="https://img.shields.io/crates/v/tzdb?logo=rust" alt="Crates.io" /></a>
+<img src="https://img.shields.io/badge/rustc-1.60+-important?logo=rust" alt="Minimum supported Rust version" title="Minimum Supported Rust Version" />
+<a href="/LICENSES"><img src="https://img.shields.io/crates/l/tzdb?color=informational&amp;logo=apache" alt="License" /></a></p>
+<p>Static time zone information for <a href="https://crates.io/crates/tz-rs">tz-rs</a>.</p>
+<p>This crate provides all time zones found in the <a href="https://www.iana.org/time-zones">Time Zone Database</a>,
+currently in the version 2022c (released 2022-08-16).</p>
+<p>See the documentation for a full list the the contained time zones:
+<a href="https://docs.rs/tzdb/latest/tzdb/time_zone/index.html">https://docs.rs/tzdb/latest/tzdb/time_zone/index.html</a></p>
+<h3 id="usage-examples"><a class="doc-anchor" href="#usage-examples">§</a>Usage examples</h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// get the system time zone
+</span><span class="kw">let </span>time_zone = tzdb::local_tz().unwrap();       <span class="comment">// tz::TimeZoneRef&lt;'_&gt;
+</span><span class="kw">let </span>current_time = tzdb::now::local().unwrap();  <span class="comment">// tz::DateTime
+
+// access by identifier
+</span><span class="kw">let </span>time_zone = tzdb::time_zone::europe::KYIV;
+<span class="kw">let </span>current_time = tzdb::now::in_tz(tzdb::time_zone::europe::KYIV).unwrap();
+
+<span class="comment">// access by name
+</span><span class="kw">let </span>time_zone = tzdb::tz_by_name(<span class="string">"Europe/Berlin"</span>).unwrap();
+<span class="kw">let </span>current_time = tzdb::now::in_named(<span class="string">"Europe/Berlin"</span>).unwrap();
+
+<span class="comment">// names are case insensitive
+</span><span class="kw">let </span>time_zone = tzdb::tz_by_name(<span class="string">"ArCtIc/LongYeArByEn"</span>).unwrap();
+<span class="kw">let </span>current_time = tzdb::now::in_named(<span class="string">"ArCtIc/LongYeArByEn"</span>).unwrap();
+
+<span class="comment">// provide a default time zone
+</span><span class="kw">let </span>current_time = tzdb::now::local_or(tzdb::time_zone::GMT).unwrap();
+<span class="kw">let </span>current_time = tzdb::now::in_named_or(tzdb::time_zone::GMT, <span class="string">"Some/City"</span>).unwrap();</code></pre></div>
+<h3 id="feature-flags"><a class="doc-anchor" href="#feature-flags">§</a>Feature flags</h3>
+<ul>
+<li>
+<p><code>by-name</code> <sup><em>(enabled by default, enabled by</em> <code>local</code><em>)</em></sup> — enables <a href="fn.tz_by_name.html" title="fn tzdb::tz_by_name"><code>tz_by_name()</code></a> to get a time zone at runtime by name</p>
+</li>
+<li>
+<p><code>list</code> <sup><em>(enabled by default)</em></sup> — enables [<code>TZ_NAMES</code>] to get a list of all shipped time zones</p>
+</li>
+<li>
+<p><code>local</code> <sup><em>(enabled by default)</em></sup> — enables <a href="fn.local_tz.html" title="fn tzdb::local_tz"><code>local_tz()</code></a> to get the system time zone</p>
+</li>
+<li>
+<p><code>now</code> <sup><em>(enabled by default)</em></sup> — enables the module [<code>now</code>] to get the current time</p>
+</li>
+<li>
+<p><code>binary</code> — make the unparsed, binary tzdata of a time zone available</p>
+</li>
+<li>
+<p><code>std</code> <sup><em>(enabled by default)</em></sup> — enable features that need the standard library <a href="https://doc.rust-lang.org/nightly/std/index.html" title="mod std"><code>std</code></a></p>
+</li>
+<li>
+<p><code>alloc</code> <sup><em>(enabled by default, enabled by</em> <code>std</code><em>)</em></sup> — enable features that need the standard library <a href="https://doc.rust-lang.org/nightly/alloc/index.html" title="mod alloc"><code>alloc</code></a></p>
+</li>
+<li>
+<p><code>fallback</code> <sup><em>(enabled by default)</em></sup> — compile for unknown target platforms, too</p>
+</li>
+</ul>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="changelog/index.html" title="mod tzdb::changelog">changelog</a></div><div class="desc docblock-short">Changes between the versions</div></li><li><div class="item-name"><a class="mod" href="time_zone/index.html" title="mod tzdb::time_zone">time_zone</a></div><div class="desc docblock-short">All defined time zones statically accessible</div></li></ul><h2 id="constants" class="section-header">Constants<a href="#constants" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="constant" href="constant.VERSION.html" title="constant tzdb::VERSION">VERSION</a></div><div class="desc docblock-short">The version of the source Time Zone Database</div></li><li><div class="item-name"><a class="constant" href="constant.VERSION_HASH.html" title="constant tzdb::VERSION_HASH">VERSION_HASH</a></div><div class="desc docblock-short">The SHA512 hash of the source Time Zone Database (using the “Complete Distribution”)</div></li></ul><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="fn" href="fn.local_tz.html" title="fn tzdb::local_tz">local_tz</a><span class="stab portability" title="Available on crate feature `local` only"><code>local</code></span></div><div class="desc docblock-short">Find the time zone of the current system</div></li><li><div class="item-name"><a class="fn" href="fn.tz_by_name.html" title="fn tzdb::tz_by_name">tz_by_name</a><span class="stab portability" title="Available on crate feature `by-name` only"><code>by-name</code></span></div><div class="desc docblock-short">Find a time zone by name, e.g. <code>&quot;Europe/Berlin&quot;</code> (case-insensitive)</div></li></ul></section></div></main></body></html>

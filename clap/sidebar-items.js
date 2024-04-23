@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"macro":["arg","command","value_parser"],"mod":["builder","error","parser"],"trait":["Args","CommandFactory","FromArgMatches","Parser","Subcommand","ValueEnum"]};

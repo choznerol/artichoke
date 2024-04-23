@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["MAX_OFFSET_SECONDS","MIN_OFFSET_SECONDS"],"enum":["TimeError"],"struct":["Offset","Time","ToA"],"type":["Result"]};

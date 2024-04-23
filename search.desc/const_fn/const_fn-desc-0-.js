@@ -1,0 +1,1 @@
+searchState.loadedDescShard("const_fn", 0, "An attribute for easy generation of const functions with …\nAn attribute for easy generation of const functions with …")

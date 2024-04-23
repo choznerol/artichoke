@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Anchor","At","CharSearch","Cmd","InputMode","KeyCode","Movement","Word"],"mod":["completion","config","error","highlight","hint","history","line_buffer","validate"],"struct":["Context","Editor","KeyEvent","Modifiers"],"trait":["ExternalPrinter","Helper"],"type":["RepeatCount","Result"]};
